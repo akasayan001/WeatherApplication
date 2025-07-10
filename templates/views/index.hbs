@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{>headerlinks}}
+</head>
+<body>
+    <!-- Floating particles -->
+    <div class="particle" style="top: 10%; left: 10%; width: 4px; height: 4px;"></div>
+    <div class="particle" style="top: 20%; left: 80%; width: 6px; height: 6px;"></div>
+    <div class="particle" style="top: 60%; left: 5%; width: 3px; height: 3px;"></div>
+    <div class="particle" style="top: 80%; left: 90%; width: 5px; height: 5px;"></div>
+
+    <!-- Navigation -->
+   {{>navbar}}
+
+    <!-- Main Header -->
+    <main class="main-header">
+        <div class="header-container">
+            <div class="header-left">
+                <p>Welcome to Weather App</p>
+                <h1>Get The Latest <span>Weather</span> Info of Your City</h1>
+                <a href="/weather"><button class="cta-button">Check Now</button></a>
+            </div>
+            <div class="header-right">
+                <div class="weather-single-image">
+                    <img src="image/pngegg (8).png" alt="Weather Image" class="weather-image">
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <!-- Footer -->
+    {{>footer}}
+    
+</body>
+</html>

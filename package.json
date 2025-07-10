@@ -1,0 +1,16 @@
+{
+  "name": "zexpress",
+  "version": "1.0.0",
+  "description": "Weather Application using Expressn jS",
+  "license": "ISC",
+  "author": "Sayan chakraborty",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "hbs": "^4.2.0"
+  }
+}

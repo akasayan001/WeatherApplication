@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App - Search Weather</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            color: #4fc3f7;
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .nav-links a.active {
+            background: rgba(79, 195, 247, 0.3);
+        }
+
+        /* Main Header */
+        .main-header {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            padding: 2rem 0;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .containter-fluid {
+            width: 100%;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -15px;
+        }
+
+        .col-md-10 {
+            flex: 0 0 83.333333%;
+            max-width: 83.333333%;
+            padding: 0 15px;
+        }
+
+        .col-12 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        .max-auto {
+            margin: 0 auto;
+        }
+
+        .main_content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .temp_form {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .temp_form input[type="text"] {
+            flex: 1;
+            max-width: 400px;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .temp_form input[type="text"]:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .temp_form input[type="text"]::placeholder {
+            color: #666;
+        }
+
+        .temp_form input[type="submit"] {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(45deg, #4fc3f7, #29b6f6);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(79, 195, 247, 0.3);
+        }
+
+        .temp_form input[type="submit"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(79, 195, 247, 0.4);
+        }
+
+        .tempInformation {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .top_layer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .top_layer p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-transform: capitalize;
+        }
+
+        .main_layer {
+            text-align: center;
+        }
+
+        #city_name {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #4fc3f7;
+            text-shadow: 0 0 20px rgba(79, 195, 247, 0.3);
+        }
+
+        .middle_layer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        #temp {
+            font-size: 4rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        #temp_realval {
+            font-size: 5rem;
+        }
+
+        #temp sup {
+            font-size: 2rem;
+            vertical-align: super;
+        }
+
+        #temp_status {
+            font-size: 3rem;
+            color: #4fc3f7;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Floating particles */
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: particle-float 6s infinite ease-in-out;
+        }
+
+        @keyframes particle-float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-100px) rotate(180deg); }
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .temp_form {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .temp_form input[type="text"] {
+                width: 100%;
+            }
+
+            .middle_layer {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            #temp {
+                font-size: 3rem;
+            }
+
+            #temp_realval {
+                font-size: 4rem;
+            }
+
+            #city_name {
+                font-size: 2rem;
+            }
+
+            .col-md-10 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main_content, .tempInformation {
+                padding: 1rem;
+            }
+
+            #temp {
+                font-size: 2.5rem;
+            }
+
+            #temp_realval {
+                font-size: 3rem;
+            }
+
+            #city_name {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating particles -->
+    <div class="particle" style="top: 10%; left: 10%; width: 4px; height: 4px; animation-delay: 0s;"></div>
+    <div class="particle" style="top: 20%; left: 80%; width: 6px; height: 6px; animation-delay: 1s;"></div>
+    <div class="particle" style="top: 60%; left: 5%; width: 3px; height: 3px; animation-delay: 2s;"></div>
+    <div class="particle" style="top: 80%; left: 90%; width: 5px; height: 5px; animation-delay: 3s;"></div>
+
+    <!-- Navigation -->
+    {{>navbar}}
+    <!-- Main Header -->
+    <main class="main-header">
+        <div class="header-container">
+            <div class="containter-fluid main_header">
+                <div class="row">
+                    <div class="col-md-10 col-12 max-auto">
+                        <div class="main_content">
+                            <form class="temp_form">
+                                <input type="text" name="" id="cityName" placeholder="Enter your city" autocomplete="off">
+                                <input type="submit" value="search" id="submitBtn">
+                            </form>
+                        </div>
+
+                        <div class="tempInformation">
+                            <div class="top_layer">
+                                <p id="day">Sunday</p>
+                                <p id="today_date">25 Jan</p>
+                            </div>
+                            <div class="main_layer ">
+                                <p id="city_name">Get Output</p>
+                                <div class="middle_layer">
+                                    <p id="temp"><span id="temp_realval">0</span><sup>o</sup>C</p>
+                                    <p id="temp_status"><i class="fa fa-cloud" aria-hidden="true"></i></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+{{>footer}}
+    <script src="js/main.js"></script>
+    <script>
+     const getCurrentDay = () => {
+    let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let currentTime = new Date();
+
+    // Get day name
+    let days = weekday[currentTime.getDay()];
+    document.getElementById('day').innerText = days;
+
+    // Get date in format: DD MMM (e.g., 10 Jul)
+    let date = currentTime.getDate();
+    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let month = months[currentTime.getMonth()];
+
+    document.getElementById('today_date').innerText = `${date} ${month}`;
+};
+
+getCurrentDay();
+
+
+    </script>
+</body>
+</html>
