@@ -9,6 +9,12 @@ A Weather Application is a web-based or mobile application that allows users to 
 - [@akasayan001](https://github.com/akasayan001)
 
 
+![image alt](https://github.com/akasayan001/WeatherApplication/blob/master/Screenshot%202025-07-10%20142152.png?raw=true)
+![image alt](https://github.com/akasayan001/WeatherApplication/blob/master/Screenshot%202025-07-10%20142231.png?raw=true)
+![image alt](https://github.com/akasayan001/WeatherApplication/blob/master/Screenshot%202025-07-10%20142249.png?raw=true)
+![image alt](https://github.com/akasayan001/WeatherApplication/blob/master/Screenshot%202025-07-10%20142259.png?raw=true)
+
+
 
 ## API Reference
 
