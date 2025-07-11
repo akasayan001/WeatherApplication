@@ -7,6 +7,11 @@ A Weather Application is a web-based or mobile application that allows users to 
 ## Authors
 
 - [@akasayan001](https://github.com/akasayan001)
+  
+## 🔗 Links
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://akasayan001.github.io/portfolio_Websites/)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sayan-chakraborty-423261222/)
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/the_sayanchakraborty?igsh=MTcxYWc4bThwZW81dQ%3D%3D&utm_source=qr)
 
 
 ![image alt](https://github.com/akasayan001/WeatherApplication/blob/master/Screenshot%202025-07-10%20142152.png?raw=true)
